@@ -13,4 +13,13 @@ This Ansible playbook installs and configures NGINX on a Linux server. It sets u
 
 ```sh
 git clone codev_assessment
-cd CodeDev
+cd CodeDev/Ansible
+
+To run playbook
+ansible-playbook setup_nginx.yml -i <target_server_ip_or_hostname>, -u <username> --private-key <path_to_private_key>
+
+To run the playbook inside a Docker container:
+docker build -t ansible-nginx .
+
+Run the Docker container:
+docker run -d -p 80:80 ansible-nginx
