@@ -1,2 +1,14 @@
-To Run
-./check_and_reboot.sh <INSTANCE_ID> <SNS_TOPIC>
+Make the script executable:
+	-	chmod +x check_and_reboot.sh
+
+Run the script:
+	-	./check_and_reboot.sh <INSTANCE_ID> <SNS_TOPIC>
+
+
+Replace <INSTANCE_ID> with the EC2 instance ID and <SNS_TOPIC> with the ARN of the SNS topic. If not provided, default values will be used.
+
+
+Variables:
+
+	-	INSTANCE_ID: The ID of the EC2 instance to reboot (default: i-123456789).
+	-	SNS_TOPIC: The ARN of the SNS topic to publish the message (default: arn:aws:sns:us-east-1:123456789012:Devops-Alerts).
