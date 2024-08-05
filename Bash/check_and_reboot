@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Variables
+INSTANCE_ID=${1:-"i-123456789"}
+SNS_TOPIC=${2:-"arn:aws:sns:us-east-1:123456789012:Devops-Alerts"}
+
+# Check if the current day of the month is odd
+DAY=$(date +%d)
+if (( $DAY % 2 != 0 )); then
+  echo "Day $DAY is odd. Rebooting EC2 instance $INSTANCE_ID..."
+
+  # Reboot the EC2 instance
+  aws ec2 reboot-instances --instance-ids $INSTANCE_ID
+
+  if [ $? -eq 0 ]; then
+    MESSAGE="Successfully rebooted EC2 instance $INSTANCE_ID on odd day $DAY."
+  else
+    MESSAGE="Failed to reboot EC2 instance $INSTANCE_ID on odd day $DAY."
+  fi
+
+  # Publish a message to the SNS topic
+  aws sns publish --topic-arn $SNS_TOPIC --message "$MESSAGE"
+else
+  echo "Day $DAY is even. No action taken."
+fi
