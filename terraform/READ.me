@@ -1,0 +1,21 @@
+Initialize the Terraform configuration:
+	- terraform init
+Apply the Terraform configuration to create the resources:
+	- terraform apply
+Confirm the apply action by typing yes when prompted.
+Configuration Details:
+provider "aws": Configures the AWS provider with the specified region.
+aws_vpc "main": Creates a VPC with a CIDR block of 10.0.0.0/16.
+aws_subnet "main": Creates a subnet within the VPC with a CIDR block of 10.0.1.0/24.
+aws_security_group "web": Creates a security group that allows inbound traffic on port 443 (HTTPS) and all outbound traffic.
+aws_instance "web": Creates an EC2 instance with the following attributes:
+	- ami: Specifies the Amazon Machine Image (AMI) ID.
+ 	- instance_type: Specifies the instance type.
+	-	subnet_id: Associates the instance with the created subnet.
+ 	-	security_groups: Attaches the security group to the instance.
+	-	root_block_device: Configures the root volume size to 100 GB.
+ 	-	associate_public_ip_address: Assigns a public IP address to the instance.
+	tags: Adds a Name tag to the instance.
+Clean UpTo destroy the created resources, run:
+	-	terraform destroy
+Confirm the destroy action by typing yes when prompted.
