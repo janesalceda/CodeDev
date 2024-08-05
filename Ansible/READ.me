@@ -1,20 +1,3 @@
-# Ansible NGINX Server Setup
-
-This Ansible playbook installs and configures NGINX on a Linux server. It sets up a virtual host configuration, ensures NGINX is enabled to start at boot, and adds a cron job to ensure it is always running.
-
-## Prerequisites
-
-- Ansible installed on the control machine
-- A target Linux server with SSH access and sudo privileges
-
-## Usage
-
-1. Clone the repository and navigate to the playbook directory.
-
-```sh
-git clone codev_assessment
-cd CodeDev/Ansible
-
 To run playbook
 ansible-playbook setup_nginx.yml -i <target_server_ip_or_hostname>, -u <username> --private-key <path_to_private_key>
 
