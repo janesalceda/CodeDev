@@ -1,14 +1,10 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr
 }
 
 resource "aws_subnet" "main" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
+  cidr_block = var.subnet_cidr
 }
 
 resource "aws_security_group" "web" {
@@ -29,19 +25,14 @@ resource "aws_security_group" "web" {
   }
 }
 
-resource "aws_instance" "web" {
-  ami           = "ami-0c55b159cbfafe1f0"  # Example AMI, replace with appropriate one
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.main.id
-  security_groups = [aws_security_group.web.name]
+output "vpc_id" {
+  value = aws_vpc.main.id
+}
 
-  root_block_device {
-    volume_size = 100
-  }
+output "subnet_id" {
+  value = aws_subnet.main.id
+}
 
-  associate_public_ip_address = true
-
-  tags = {
-    Name = "WebServer"
-  }
+output "security_group_id" {
+  value = aws_security_group.web.id
 }
